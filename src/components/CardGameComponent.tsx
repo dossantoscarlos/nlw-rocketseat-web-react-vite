@@ -10,14 +10,14 @@ export default function CardGameComponent ({
   }:Props
 ){
   return (
-    <>
-      <figure className="w-full cursor-pointer rounded-lg overflow-hidden relative">  
-        <img className=""
+      <div className="carousel-item overflow-hidden rounded-lg ">
+       <figure className="w-full cursor-pointer relative">  
+        <img className="w-64 rounded-lg"
           title={titulo}
           alt={titulo}
           src={ srcImg } 
         />
-        <figcaption className='bg-zinc-900/80 px-4 py-2 w-full absolute top-0'>
+        <figcaption className='bg-zinc-900/70 px-4 w-64 rounded-t-lg absolute top-0'>
           <h1 
             className='text-white block font-bold text-sm'
            title={titulo}>
@@ -29,6 +29,6 @@ export default function CardGameComponent ({
           <span className='text-zinc-300 text-xs block m-1'>{ adsCount } anúncio(s)</span>
         </figcaption>
       </figure>
-    </>
+      </div>
   );
 }
