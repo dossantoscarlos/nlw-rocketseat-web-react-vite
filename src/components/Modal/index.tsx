@@ -67,9 +67,7 @@ export const Modal = () => {
             <div className='flex flex-col gap-2 mb-2'>
               <label htmlFor='game'>Qual o game?</label>
               <select id='game'  name='game'  required className="form-select py-2 px-3 bg-zinc-900 text-sm placeholder:text-zinc-400 rounded" defaultValue={""}>
-                
                 <option disabled  value="">Selecione o jogo que deseja jogar.</option>
-
                 {games.map(game => <option 
                   key={game.id} 
                   className='hover:bg-violet-600' 
