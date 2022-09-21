@@ -1,27 +1,34 @@
-
-interface CardProps {
+interface Props {
   srcImg: string,
   href?:string,
-  titulo?:string,
-  adsCount?:number
+  titulo:string,
+  adsCount:number
 }
 
-export default function CardGameComponent (props:CardProps){
-
+export default function CardGameComponent ({ 
+    srcImg, titulo, adsCount, href 
+  }:Props
+){
   return (
     <>
-      <a href={props.href} className="relative rounded-lg overflow-hidden">  
-
-        <img 
-          src={ props.srcImg } 
+      <figure className="w-full cursor-pointer rounded-lg overflow-hidden relative">  
+        <img className=""
+          title={titulo}
+          alt={titulo}
+          src={ srcImg } 
         />
-        <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
-          <strong 
-            className='font-bold text-white block'
-          >{ props.titulo }</strong>
-          <span className='text-zinc-300 text-sm block m-1'>{ props.adsCount } anúncio(s)</span>
-        </div>
-      </a>
+        <figcaption className='bg-zinc-900/80 px-4 py-2 w-full absolute top-0'>
+          <h1 
+            className='text-white block font-bold text-sm'
+           title={titulo}>
+              { 
+                (titulo.length > 26) 
+                  ? titulo?.substring(0,25)+"..."
+                  : titulo
+               }</h1>
+          <span className='text-zinc-300 text-xs block m-1'>{ adsCount } anúncio(s)</span>
+        </figcaption>
+      </figure>
     </>
   );
 }
