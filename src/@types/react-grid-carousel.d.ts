@@ -1,1 +1,1 @@
-// declare module "react-grid-carousel" {}
+declare module "react-grid-carousel";
