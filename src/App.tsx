@@ -23,18 +23,17 @@ export default function App() {
       <img src={logoImg} alt=""  />
       <h1 className="md:text-6xl text-4xl mb-10 md:mb-0 font-black text-white mt-4">Seu <span className='text-transparent bg-clip-text bg-nlw-gradient'>duo</span> esta aqui.</h1>
       <div className='mt-8 grid grid-cols-6 gap-5 px-6'>          
-           { games.map(game => {
-              return (
-                <CardGameComponent
-                  data={game}
-                  key={game.id} />
-              );
-            } 
-            )}
+        { games.map(game => {
+          return (
+            <CardGameComponent
+             data={game}
+            key={game.id} />
+            );
+          } 
+        )}
       </div>
-      <ListGames/>
+      <ListGames data={games} />
       <Modal />
     </div>
   )
 } 
-''

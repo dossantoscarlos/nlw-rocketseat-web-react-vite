@@ -4,18 +4,23 @@ import * as ToggleGroup from "@radix-ui/react-toggle-group";
 import { Check, GameController } from "phosphor-react";
 import { useState, useEffect, FormEvent } from "react";
 import CreateAdBanner from "../CreateBannerAdComponent";
-import { Input } from "../Form/Index";
+import { Input, Options } from "../Form/Index";
 import axios from 'axios';
+import { URL_BASE_API } from '../../util'
+
+
 
 interface Game {
   id:string;
   title:string;
 }
 
+
+
 export const Modal = () => {
   const [ games, setGames ] = useState<Game[]>([])
   const [useVoiceChannel,setUseVoiceChannel] = useState(false)
-  const URL_BASE:string = 'https://nlw-api-nest.herokuapp.com' 
+  
   const [weekDays, setWeekDays] = useState<string[]>([])
   const toggleItems = [
     {id: 0, title:"Domingo", label: "D" },
@@ -28,8 +33,12 @@ export const Modal = () => {
   ];
 
   useEffect(() => {
-    axios(URL_BASE+"/games").then(response => setGames(response.data))
+    axios(URL_BASE_API+"/games/list").then(response => setGames(response.data))
   },[]);
+
+
+  const optionGames = games.map(game => <Options value= {game.id} key={game.id} text={game.title}/>)
+
 
   async function handleSubmit (event :FormEvent) {
     event.preventDefault();
@@ -37,7 +46,7 @@ export const Modal = () => {
     const data = Object.fromEntries(formData);
     console.log(data.game)
     try{
-      await axios.post(URL_BASE+`/games/${data.game}/ads`,{
+      await axios.post(URL_BASE_API+`/games/${data.game}/ads`,{
         name:data.name,
         yearsPlaying: data.yearsPlaying,
         weekDays,
@@ -68,12 +77,7 @@ export const Modal = () => {
               <label htmlFor='game'>Qual o game?</label>
               <select id='game'  name='game'  required className="form-select py-2 px-3 bg-zinc-900 text-sm placeholder:text-zinc-400 rounded" defaultValue={""}>
                 <option disabled  value="">Selecione o jogo que deseja jogar.</option>
-                {games.map(game => <option 
-                  key={game.id} 
-                  className='hover:bg-violet-600' 
-                  value={game.id}>
-                    {game.title}
-                  </option>)}  
+                { optionGames }
               </select>
               </div>
             

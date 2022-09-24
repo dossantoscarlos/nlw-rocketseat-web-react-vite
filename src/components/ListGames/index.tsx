@@ -19,6 +19,15 @@ export const ListGames =  () => {
 
   useEffect(() => { showGames() },[])
   
+  const gameList = games.map(game => {
+      return (     
+        <CardGameComponent
+          data={game}
+          key={game.id} />
+      );
+    })
+  
+
   const Overlay = styled(Dialog.Overlay, {
     background: 'rgba(0 0 0 / 0.5)',
     position: 'fixed',
@@ -56,15 +65,7 @@ export const ListGames =  () => {
           </Dialog.Title>
           <hr className="bg-nlw-gradient pt-1 mt-2 rounded"/>
           <div className='mt-8 grid grid-cols-5 gap-5'>          
-            { games.map(game => {
-              return (
-                <div>
-                  <CardGameComponent
-                    data={game}
-                    key={game.id} />
-                </div>
-              );
-            })}
+            {gameList}          
           </div>
         </Content>
       </Dialog.Portal>

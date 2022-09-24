@@ -7,6 +7,7 @@ interface Props {
 export default function CardGameComponent ({ data }:Props){
   
   return (
+    <>
     <figure className="w-full cursor-pointer relative">  
       <img className="rounded-lg w-full"
         title={data.title}
@@ -20,5 +21,6 @@ export default function CardGameComponent ({ data }:Props){
         <span className='text-zinc-300 text-xs block m-1'>{ data._count.ads } anúncio(s)</span>
       </figcaption>
     </figure>
+    </>
   );
 }

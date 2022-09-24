@@ -23,3 +23,13 @@ export function Button (props:Props) {
       {props.title}
     </button>);
 } 
+
+interface PropsOptions {
+  value:string;
+  text: string;
+
+}
+
+export function Options ({value, text }:PropsOptions) {
+  return <option value={value}>{text}</option> 
+}
