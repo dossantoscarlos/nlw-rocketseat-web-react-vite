@@ -32,7 +32,7 @@ export default function App() {
           } 
         )}
       </div>
-      <ListGames data={games} />
+      <ListGames />
       <Modal />
     </div>
   )

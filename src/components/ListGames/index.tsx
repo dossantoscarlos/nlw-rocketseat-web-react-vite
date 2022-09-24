@@ -17,7 +17,7 @@ export const ListGames =  () => {
     await axios(URL_BASE_API+'/games/list').then((response) => setGames(response.data));
   }
 
-  useEffect(() => { showGames() },[])
+  useEffect(() => {showGames()},[])
   
   const gameList = games.map(game => {
       return (     
