@@ -15,9 +15,12 @@ interface Game {
   title:string;
 }
 
+interface CallBackParent {
+  saveAdsCallbackParent : (bool:boolean) => void
+}
 
 
-export const Modal = () => {
+export const Modal = ({ saveAdsCallbackParent }:CallBackParent) => {
   const [ games, setGames ] = useState<Game[]>([])
   const [useVoiceChannel,setUseVoiceChannel] = useState(false)
   
@@ -33,9 +36,17 @@ export const Modal = () => {
   ];
 
   useEffect(() => {
-    axios(URL_BASE_API+"/games/list").then(response => setGames(response.data))
+    fetch(URL_BASE_API+"/games/list")
+    .then(response => response.json())
+    .then(data => setGames(data))
   },[]);
 
+  const handleUpdatedSaveAds = (bool:boolean) => {
+    if(bool)
+      fetch(URL_BASE_API+"/games/list")
+      .then(response => response.json())
+      .then(data => setGames(data))
+  }
 
   const optionGames = games.map(game => <Options value= {game.id} key={game.id} text={game.title}/>)
 
@@ -54,7 +65,10 @@ export const Modal = () => {
         hourStart: data.hourStart,
         hourEnd: data.hourEnd,
         useVoiceChannel
-      }).then(response => console.log(response.data))
+      }).then(response => {
+        saveAdsCallbackParent(true);
+        handleUpdatedSaveAds(true);
+      })
 
       alert('anúncio criado com sucesso!!!')
     }catch(err){

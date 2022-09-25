@@ -4,21 +4,20 @@ import Game from "../../interfaces/Game";
 import CardGameComponent from "../CardGameComponent";
 import { URL_BASE_API } from '../../util/index';
 import axios from "axios";
-import { ShowListGames } from "../ShowListGame";
 import { X } from "phosphor-react";
 import { styled } from "@stitches/react";
 import '../../App.css'
 
-
-export const ListGames =  () => {
+interface Props {
+  updated: boolean
+}
+export const ListGames =  ({updated}:Props) => {
   const [games, setGames] = useState<Game[]>([])
-  
-  const showGames = async() => {
-    await axios(URL_BASE_API+'/games/list').then((response) => setGames(response.data));
+
+  function requestApi () { 
+    axios(URL_BASE_API+'/games/list').then((response) => setGames(response.data));
   }
 
-  useEffect(() => {showGames()},[])
-  
   const gameList = games.map(game => {
       return (     
         <CardGameComponent
@@ -53,7 +52,13 @@ export const ListGames =  () => {
 
   return (
     <Dialog.Root>
-      <ShowListGames/>
+        <Dialog.Trigger onClick={requestApi}>
+          <div className='w-72 rounded bg-nlw-gradient my-4 p-1 mt-8 text-center text-lg text-white'>
+            <div className=' bg-[#2A2634] p-1'>
+              <h1 className='font-black/90 hover:underline text-lg' >Ver mais...</h1>
+            </div>
+          </div>
+        </Dialog.Trigger>
       <Dialog.Portal>
         <Overlay className='bg-black/80 inset-0 fixed'/>
         <Content className='fixed bg-[#2A2634] px-8 pt-10 pb-5 text-white w-full h-full rounded-lg bg-blend-overlay shadow-lg shadow-black/25'>

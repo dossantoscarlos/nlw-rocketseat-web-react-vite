@@ -3,7 +3,6 @@ interface Props {
   data: Game
 }
 
-
 export default function CardGameComponent ({ data }:Props){
   
   return (
